@@ -27,11 +27,13 @@ RUN set -eux; \
 		icu-dev \
 		libzip-dev \
 		zlib-dev \
+		postgresql-dev \
 	; \
 	\
 	docker-php-ext-configure zip; \
 	docker-php-ext-install -j$(nproc) \
 		intl \
+		pdo_pgsql \
 		zip \
 	; \
 	pecl install \
