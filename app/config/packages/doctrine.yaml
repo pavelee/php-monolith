@@ -1,13 +1,13 @@
 doctrine:
     dbal:
-        host: '%env(resolve:DB_SERVICE)%'
-        port: '%env(resolve:DB_PORT)%'
-        user: '%env(resolve:DB_USER)%'
-        password: '%env(resolve:DB_PASSWORD)%'
-        dbname: '%env(resolve:DB_NAME)%'
-        server_version: '%env(resolve:DB_VERSION)%'
-        driver: '%env(resolve:DB_DRIVER)%'
-        charset: '%env(resolve:DB_CHARSET)%'
+        host: '%env(resolve:POSTGRES_SERVICE)%'
+        port: '%env(resolve:POSTGRES_PORT)%'
+        user: '%env(resolve:POSTGRES_USER)%'
+        password: '%env(resolve:POSTGRES_PASSWORD)%'
+        dbname: '%env(resolve:POSTGRES_DB)%'
+        server_version: '%env(resolve:POSTGRES_VERSION)%'
+        driver: '%env(resolve:POSTGRES_DRIVER)%'
+        charset: '%env(resolve:POSTGRES_CHARSET)%'
     orm:
         auto_generate_proxy_classes: true
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
