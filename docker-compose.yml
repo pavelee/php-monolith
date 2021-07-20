@@ -5,6 +5,8 @@ services:
         build:
             context: ./
             target: php
+            args:
+                USER_ID: 1000
         healthcheck:
             interval: 10s
             timeout: 3s
@@ -31,11 +33,6 @@ services:
         image: postgres:13-alpine
         env_file:
             - ./app/.env
-        # environment:
-        #     - POSTGRES_DB=${DB_NAME}
-        #     - POSTGRES_PASSWORD=${DB_PASSWORD}
-        #     - POSTGRES_USER=${DB_USER}
-        #     - TZ=${DB_TZ}
         volumes:
             - db-data:/var/lib/postgresql/data:rw
         ports:

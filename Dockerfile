@@ -59,6 +59,9 @@ ARG APP_ENV=prod
 
 COPY app/composer.json app/composer.lock app/symfony.lock ./
 
+ARG USER_ID=1000
+RUN apk --no-cache add shadow && usermod -u ${USER_ID} www-data
+
 COPY app/.env ./
 COPY app/bin bin/
 COPY app/config config/
