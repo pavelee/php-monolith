@@ -72,7 +72,6 @@ RUN mkdir -p var vendor
 RUN chown -R www-data:www-data .
 RUN chown -R www-data:www-data /usr/local/etc/php
 VOLUME /srv/var
-VOLUME /srv/vendor
 
 USER www-data
 
