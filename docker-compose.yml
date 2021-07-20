@@ -14,7 +14,6 @@ services:
             start_period: 30s
         volumes:
             - ./app:/srv:rw,cached
-            - ./app/vendor:/srv/vendor:rw,cached
             - ./docker/php/conf.d/dev.ini/:/usr/local/etc/php/conf.d/php.ini
 
     nginx:
