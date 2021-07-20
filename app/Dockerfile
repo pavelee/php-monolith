@@ -57,21 +57,23 @@ WORKDIR /srv
 
 ARG APP_ENV=prod
 
-COPY app/composer.json app/composer.lock app/symfony.lock ./
+COPY composer.json composer.lock symfony.lock ./
 
 ARG USER_ID=1000
 RUN apk --no-cache add shadow && usermod -u ${USER_ID} www-data
 
-COPY app/.env ./
-COPY app/bin bin/
-COPY app/config config/
-COPY app/public public/
-COPY app/src src/
+COPY .env ./
+COPY bin bin/
+COPY config config/
+COPY public public/
+COPY src src/
 
-RUN mkdir -p var vendor
+RUN mkdir -p var
+RUN mkdir -p vendor
 RUN chown -R www-data:www-data .
 RUN chown -R www-data:www-data /usr/local/etc/php
 VOLUME /srv/var
+VOLUME /srv/vendor
 
 USER www-data
 
@@ -80,11 +82,6 @@ RUN composer install
 
 ENTRYPOINT ["docker-entrypoint"]
 CMD ["php-fpm"]
-
-FROM php AS php_prod
-
-RUN composer dump-env prod; \
-	rm .env
 
 FROM nginx:${NGINX_VERSION}-alpine AS nginx
 

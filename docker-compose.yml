@@ -3,7 +3,7 @@ version: "3"
 services:
     php:
         build:
-            context: ./
+            context: ./app
             target: php
             args:
                 USER_ID: 1000
@@ -18,7 +18,7 @@ services:
 
     nginx:
         build:
-            context: ./
+            context: ./app
             target: nginx
         depends_on:
             - php
