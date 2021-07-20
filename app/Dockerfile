@@ -68,8 +68,7 @@ COPY config config/
 COPY public public/
 COPY src src/
 
-RUN mkdir -p var
-RUN mkdir -p vendor
+RUN mkdir -p var vendor
 RUN chown -R www-data:www-data .
 RUN chown -R www-data:www-data /usr/local/etc/php
 VOLUME /srv/var
