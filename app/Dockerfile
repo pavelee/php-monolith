@@ -1,6 +1,7 @@
 ARG PHP_VERSION=8.0
 ARG NGINX_VERSION=1.17
 ARG ALPINE_VERSION=3.13
+ARG COMPOSER_VERSION=2.1
 ARG TZ=Europe/Warsaw
 
 FROM php:${PHP_VERSION}-fpm-alpine${ALPINE_VERSION} AS php
@@ -75,11 +76,14 @@ VOLUME /srv/var
 
 USER www-data
 
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-RUN composer install
+COPY --from=composer:2.1 /usr/bin/composer /usr/bin/composer
 
 ENTRYPOINT ["docker-entrypoint"]
 CMD ["php-fpm"]
+
+FROM php AS php_prod
+
+RUN composer install --no-dev --no-scripts --no-interaction --prefer-dist --optimize-autoloader
 
 FROM nginx:${NGINX_VERSION}-alpine AS nginx
 
