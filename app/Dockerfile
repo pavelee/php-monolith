@@ -68,6 +68,7 @@ COPY bin bin/
 COPY config config/
 COPY public public/
 COPY src src/
+RUN chmod -R +x bin
 
 RUN mkdir -p var vendor
 RUN chown -R www-data:www-data .
