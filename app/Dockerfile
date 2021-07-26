@@ -1,13 +1,14 @@
 ARG PHP_VERSION=8.0
 ARG NGINX_VERSION=1.17
 ARG ALPINE_VERSION=3.13
-ARG TZ=Europe/Warsaw
 
 FROM php:${PHP_VERSION}-fpm-alpine${ALPINE_VERSION} AS php
 
+#timezone
+ENV TZ=Europe/Warsaw
 RUN apk add --no-cache tzdata
-RUN ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime && echo ${TZ} > /etc/timezone
-RUN printf '[PHP]\ndate.timezone = "${TZ}"\n' > /$PHP_INI_DIR/conf.d/tzone.ini
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+RUN printf '[PHP]\ndate.timezone = "Europe/Warsaw"\n' > /$PHP_INI_DIR/conf.d/tzone.ini
 
 RUN apk add --no-cache \
 		acl \
